@@ -1,0 +1,27 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+import logo from '../public/logo1.jpg';
+
+function NavBar() {
+  return (
+    <nav className=" items-center justify-center md:flex  md:justify-around py-4 border-b-2 border-black">
+      <div className='md:w-60'>
+      <Image src={logo} alt='Logo da Thrasher' />
+      </div>
+      <ul className='py-2 flex gap-8 items-center justify-center lg:gap-16'>
+        <li className='text-center'>
+          <Link href='/' className='text-2xl lg:text-3xl lg:hover:border-b-2 border-black '>Home</Link>
+        </li>
+        <li className='text-center'>
+          <Link href='/' className='text-2xl lg:text-3xl lg:hover:border-b-2 border-black '>Shop</Link>
+        </li>
+        <li className='text-center'>
+          <Link href='/' className='text-2xl lg:text-3xl lg:hover:border-b-2 border-black '>Cart</Link>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
+export default NavBar
