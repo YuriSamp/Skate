@@ -26,13 +26,13 @@ export default function Home() {
 
         <section className='py-12'>
         <h2 className="titulo">Shapes</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-2 gap-3 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-2 gap-6  justify-items-center">
             {shapes.map(item => (
               <ShapeHome key={item.Nome} Nome={item.Nome} Path={item.imagem} />
             ))}
           </div>
         </section>
-
+              
         <section className='pb-10'>
           <h2 className="titulo">Galeria</h2>
           <div className="lg:flex justify-center">
