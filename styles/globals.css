@@ -9,21 +9,25 @@
     color: black;
     cursor: pointer;
   }
-  .titulo{
-  text-align: center;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: 3rem;
-  color: #141212;
+  .titulo {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    color: #141212;
   }
 }
 
+/* @layer base {
+  body {
+    @apply !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-gray-700;
+  }
+} */
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  background-color: #FCFBF4 ;
+  background-color: #fcfbf4;
   list-style: none;
 }
 
@@ -35,4 +39,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
