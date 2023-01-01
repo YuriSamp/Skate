@@ -6,6 +6,7 @@ import shapes from '../../data/shapes.json';
 import { FormataBRL } from '../../utils/FormataBRL'
 import { CiMoneyBill } from "react-icons/ci";
 import Shapeforms from '../../components/Shapeforms'
+import Link from 'next/link';
 
 const Produto = () => {
   const router = useRouter()
@@ -22,10 +23,10 @@ const Produto = () => {
     <>
       <NavBar />
       <main className='m-auto w-[72rem] h-16  my-16 '>
-        <button className='flex items-center gap-4 py-4'>
+        <Link href='/' className='flex items-center gap-4 py-4'>
           <AiOutlineArrowLeft />
           <p className='uppercase text-2xl'>Retornar</p>
-        </button>
+        </Link>
         <section>
           {Shape.map(item => (
             <div key={item.Nome} className='flex gap-8' >
@@ -45,7 +46,7 @@ const Produto = () => {
                     <p><strong>5% de desconto</strong> pagando à vista</p>
                   </div>
                 </div>
-                <Shapeforms Price={item.Preco} Name={item.Nome} Image={item.imagem} />
+                <Shapeforms Price={item.Preco} Name={item.Nome} Image={item.imagem} Id={item.Id} />
               </aside>
             </div>
           ))}

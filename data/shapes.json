@@ -1,46 +1,55 @@
 [
   {
+    "Id": 1,
     "Nome": "Primitive Wade Desarmo Rapture",
     "imagem": "/shapes/Shape-11.jpg",
     "Preco": 419
   },
   {
+    "Id": 2,
     "Nome": "Blaze Supply Script White",
     "imagem": "/shapes/Shape-2.jpg",
     "Preco": 299
   },
   {
+    "Id": 3,
     "Nome": "Hondar Food Roberto Souzas",
     "imagem": "/shapes/Shape-12.jpg",
     "Preco": 339
   },
 
   {
+    "Id": 4,
     "Nome": "Primitive Dos Flores Blk",
     "imagem": "/shapes/Shape-4.jpg",
     "Preco": 399
   },
   {
+    "Id": 5,
     "Nome": "Hondar Watch Blue",
     "imagem": "/shapes/Shape-14.jpg",
     "Preco": 289
   },
   {
+    "Id": 6,
     "Nome": "Element Brazin White",
     "imagem": "/shapes/Shape-13.jpg",
     "Preco": 329
   },
   {
+    "Id": 7,
     "Nome": "Black Sheep Clouds Purple",
     "imagem": "/shapes/Shape-1.webp",
     "Preco": 219
   },
   {
+    "Id": 8,
     "Nome": "Plan B Team Hawaii",
     "imagem": "/shapes/Shape-3.webp",
     "Preco": 409
   },
   {
+    "Id": 9,
     "Nome": "Grizzly Maple Peace Bear",
     "imagem": "/shapes/Shape-20.webp",
     "Preco": 349

@@ -8,9 +8,10 @@ type Props = {
   Price: number
   Name: string
   Image: string
+  Id: number
 }
 
-function Shapeforms({ Price, Name, Image }: Props) {
+function Shapeforms({ Price, Name, Image, Id }: Props) {
 
   const [Quantity, setQuantity] = useState(1);
   const [Size, setSize] = useState('');
@@ -26,11 +27,12 @@ function Shapeforms({ Price, Name, Image }: Props) {
       return
     }
     const cartItem = {
+      Id,
       Price,
       Name,
       Image,
       Quantity,
-      Size
+      Size,
     }
     setList((prevState) => [...prevState, cartItem])
     setSucessMsg('Seu item foi adicionado ao carrinho')

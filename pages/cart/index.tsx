@@ -6,15 +6,38 @@ import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Image from 'next/image'
 import { FormataBRL } from '../../utils/FormataBRL'
 import Footer from '../../components/Footer'
+import { Checkbox } from "@material-tailwind/react";
+import React, { useState } from 'react'
+import { IShapes } from '../../utils/interfaces/Shape'
 
 
 export default function Carrinho() {
 
-  const lista = useRecoilValue(ListaDeCompras)
-  const arrPrice = lista.map(item => item.Price * item.Quantity);
+  const lista = useRecoilValue<IShapes[]>(ListaDeCompras)
+
+  const ListaTradada = lista.map(item => {
+    const newObject = {
+      ...item,
+      Selecionado: true
+    }
+    return newObject
+  })
+
+  const [ListaFinal, setListaFInal] = useState<IShapes[]>(ListaTradada)
+  const TotalPrice = ListaFinal?.filter(item => item.Selecionado === true)
+  const arrPrice = TotalPrice.map(item => item.Price * item.Quantity);
   const finalPrice = arrPrice.reduce((a, b) => a + b, 0)
-  console.log(lista);
-  console.log(finalPrice);
+
+  function handleChanger(id: number) {
+    const ListaVerificada = ListaFinal.map(item => {
+      if (item.Id === id) {
+        item.Selecionado = !item.Selecionado
+      }
+      return item
+    })
+    console.log(ListaVerificada)
+    setListaFInal(ListaVerificada);
+  }
 
   return (
     <>
@@ -28,14 +51,17 @@ export default function Carrinho() {
       </header>
 
       <main>
-        <section className='m-auto w-[72rem] pt-16 pb-24 ' >
+        <form className='m-auto w-[72rem] pt-16 pb-24 min-h-[73vh] ' >
           <div className='flex items-center gap-4 py-4'>
             <AiOutlineShoppingCart className='w-7 h-7' />
             <h1 className='text-2xl uppercase'>Carrinho</h1>
           </div>
           <div className='flex flex-col border-b-2'>
             {lista.map(item => (
-              <section key={item.Price} className='flex py-4'>
+              <section key={item.Id} className='flex py-4'>
+                <div className='flex items-center px-4'>
+                  <Checkbox color='indigo' defaultChecked onChange={() => handleChanger(item.Id)} />
+                </div>
                 <Image src={item.Image} alt='foto do produto' width={200} height={200} className='border-[1px] border-black' />
                 <div className='flex flex-col px-4 w-full gap-6'>
                   <div className='flex items-baseline justify-between'>
@@ -48,8 +74,8 @@ export default function Carrinho() {
                     <p>Tamanho : {item.Size}</p>
                   </div>
                   <div className='space-x-2'>
-                    <input type='checkbox' />
-                    <label >Este pedido é para presente</label>
+                    <input type='checkbox' id='gift' />
+                    <label htmlFor='gift' >Este pedido é para presente</label>
                   </div>
                   <button className='text-left'>Excluir</button>
                 </div>
@@ -58,9 +84,9 @@ export default function Carrinho() {
           </div>
           <div className='w-full flex justify-between py-2 px-4 items-center'>
             <button className='text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100'>Fechar pedido</button>
-            <h2 className='text-xl'>Subtotal ({lista.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
+            <h2 className='text-xl'>Subtotal ({TotalPrice.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
           </div>
-        </section>
+        </form>
         <Footer />
       </main>
     </>
