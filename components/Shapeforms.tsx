@@ -6,9 +6,11 @@ import { useRecoilState } from 'recoil';
 
 type Props = {
   Price: number
+  Name: string
+  Image: string
 }
 
-function Shapeforms(Price: Props) {
+function Shapeforms({ Price, Name, Image }: Props) {
 
   const [Quantity, setQuantity] = useState(1);
   const [Size, setSize] = useState('');
@@ -24,7 +26,9 @@ function Shapeforms(Price: Props) {
       return
     }
     const cartItem = {
-      ...Price,
+      Price,
+      Name,
+      Image,
       Quantity,
       Size
     }

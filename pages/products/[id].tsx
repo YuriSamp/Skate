@@ -45,7 +45,7 @@ const Produto = () => {
                     <p><strong>5% de desconto</strong> pagando à vista</p>
                   </div>
                 </div>
-                <Shapeforms Price={item.Preco} />
+                <Shapeforms Price={item.Preco} Name={item.Nome} Image={item.imagem} />
               </aside>
             </div>
           ))}
