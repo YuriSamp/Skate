@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import NavBar from '../../components/NavBar'
 import { ListaDeCompras } from '../../utils/atom'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
@@ -7,37 +7,64 @@ import Image from 'next/image'
 import { FormataBRL } from '../../utils/FormataBRL'
 import Footer from '../../components/Footer'
 import { Checkbox } from "@material-tailwind/react";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IShapes } from '../../utils/interfaces/Shape'
 
 
 export default function Carrinho() {
 
-  const lista = useRecoilValue<IShapes[]>(ListaDeCompras)
+  const [lista, setLista] = useRecoilState<IShapes[]>(ListaDeCompras)
+  const [CartItems, setCartItems] = useState<IShapes[]>()
 
-  const ListaTradada = lista.map(item => {
-    const newObject = {
-      ...item,
-      Selecionado: true
-    }
-    return newObject
-  })
+  useEffect(() => {
+    const ListaTradada = lista.map(item => {
+      const newObject = {
+        ...item,
+        Selecionado: true,
+        Presente: false
+      }
+      return newObject
+    })
+    setCartItems(ListaTradada)
+  }, [lista])
 
-  const [ListaFinal, setListaFInal] = useState<IShapes[]>(ListaTradada)
-  const TotalPrice = ListaFinal?.filter(item => item.Selecionado === true)
-  const arrPrice = TotalPrice.map(item => item.Price * item.Quantity);
-  const finalPrice = arrPrice.reduce((a, b) => a + b, 0)
+  const SelectedItems = CartItems?.filter(item => item.Selecionado === true)
+  const arrPrice = SelectedItems?.map(item => item.Price * item.Quantity);
+  const finalPrice = arrPrice?.reduce((a, b) => a + b, 0)
 
-  function handleChanger(id: number) {
-    const ListaVerificada = ListaFinal.map(item => {
+  function handleChanger(id: string) {
+    const ListaVerificada = CartItems?.map(item => {
       if (item.Id === id) {
         item.Selecionado = !item.Selecionado
       }
       return item
     })
-    console.log(ListaVerificada)
-    setListaFInal(ListaVerificada);
+    setCartItems(ListaVerificada);
   }
+
+  function handleRemove(id: string, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault()
+    const ListaVerificada = CartItems?.filter(item => item.Id !== id)
+    ListaVerificada && setLista(ListaVerificada);
+  }
+
+  function handleGift(id: string) {
+    const ListaVerificada = CartItems?.map(item => {
+      if (item.Id === id) {
+        item.Presente = !item.Presente
+      }
+      return item
+    })
+    setCartItems(ListaVerificada);
+  }
+
+  function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const Payment = {
+      ...SelectedItems,
+      finalPrice,
+    }
+  }
+
 
   return (
     <>
@@ -49,7 +76,6 @@ export default function Carrinho() {
       <header>
         <NavBar />
       </header>
-
       <main>
         <form className='m-auto w-[72rem] pt-16 pb-24 min-h-[73vh] ' >
           <div className='flex items-center gap-4 py-4'>
@@ -57,7 +83,7 @@ export default function Carrinho() {
             <h1 className='text-2xl uppercase'>Carrinho</h1>
           </div>
           <div className='flex flex-col border-b-2'>
-            {lista.map(item => (
+            {CartItems?.map(item => (
               <section key={item.Id} className='flex py-4'>
                 <div className='flex items-center px-4'>
                   <Checkbox color='indigo' defaultChecked onChange={() => handleChanger(item.Id)} />
@@ -74,17 +100,21 @@ export default function Carrinho() {
                     <p>Tamanho : {item.Size}</p>
                   </div>
                   <div className='space-x-2'>
-                    <input type='checkbox' id='gift' />
+                    <input type='checkbox' id='gift' onChange={e => handleGift(item.Id)} />
                     <label htmlFor='gift' >Este pedido é para presente</label>
                   </div>
-                  <button className='text-left'>Excluir</button>
+                  <button className='text-left' onClick={(e) => handleRemove(item.Id, e)}>Excluir</button>
                 </div>
               </section>
             ))}
           </div>
           <div className='w-full flex justify-between py-2 px-4 items-center'>
             <button className='text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100'>Fechar pedido</button>
-            <h2 className='text-xl'>Subtotal ({TotalPrice.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
+            {finalPrice ?
+              <h2 className='text-xl'>Subtotal ({SelectedItems?.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
+              :
+              <h2 className='text-xl'>Nenhum Item no pedido</h2>
+            }
           </div>
         </form>
         <Footer />

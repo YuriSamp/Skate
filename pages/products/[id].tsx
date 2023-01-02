@@ -7,6 +7,7 @@ import { FormataBRL } from '../../utils/FormataBRL'
 import { CiMoneyBill } from "react-icons/ci";
 import Shapeforms from '../../components/Shapeforms'
 import Link from 'next/link';
+import Footer from '../../components/Footer';
 
 const Produto = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const Produto = () => {
   return (
     <>
       <NavBar />
-      <main className='m-auto w-[72rem] h-16  my-16 '>
+      <main className='m-auto w-[72rem] my-16 '>
         <Link href='/' className='flex items-center gap-4 py-4'>
           <AiOutlineArrowLeft />
           <p className='uppercase text-2xl'>Retornar</p>
@@ -46,12 +47,13 @@ const Produto = () => {
                     <p><strong>5% de desconto</strong> pagando à vista</p>
                   </div>
                 </div>
-                <Shapeforms Price={item.Preco} Name={item.Nome} Image={item.imagem} Id={item.Id} />
+                <Shapeforms Price={item.Preco} Name={item.Nome} Image={item.imagem} />
               </aside>
             </div>
           ))}
         </section>
       </main>
+      <Footer />
     </>
   )
 }
