@@ -59,10 +59,13 @@ export default function Carrinho() {
   }
 
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault()
     const Payment = {
       ...SelectedItems,
       finalPrice,
     }
+    console.log(Payment)
+    setLista([])
   }
 
 
@@ -77,8 +80,8 @@ export default function Carrinho() {
         <NavBar />
       </header>
       <main>
-        <form className='m-auto w-[72rem] pt-16 pb-24 min-h-[73vh] ' >
-          <div className='flex items-center gap-4 py-4'>
+        <form className='m-auto md:w-[47rem] lg:w-[72rem] pt-16 pb-24 min-h-[73vh] ' >
+          <div className='flex items-center gap-4 py-4 pl-10'>
             <AiOutlineShoppingCart className='w-7 h-7' />
             <h1 className='text-2xl uppercase'>Carrinho</h1>
           </div>
@@ -86,34 +89,34 @@ export default function Carrinho() {
             {CartItems?.map(item => (
               <section key={item.Id} className='flex py-4'>
                 <div className='flex items-center px-4'>
-                  <Checkbox color='indigo' defaultChecked onChange={() => handleChanger(item.Id)} />
+                  <Checkbox defaultChecked onChange={() => handleChanger(item.Id)} />
                 </div>
                 <Image src={item.Image} alt='foto do produto' width={200} height={200} className='border-[1px] border-black' />
                 <div className='flex flex-col px-4 w-full gap-6'>
                   <div className='flex items-baseline justify-between'>
-                    <h3 className='text-2xl'>{item.Name}</h3>
-                    <p className='text-xl font-bold'>{FormataBRL(item.Price)}</p>
+                    <h3 className='md:text-lg lg:text-2xl'>{item.Name}</h3>
+                    <p className='md:text-lg lg:text-xl'>Unidade: <strong>{FormataBRL(item.Price)}</strong></p>
                   </div>
                   <p className='text-xl text-green-700'>Em estoque</p>
                   <div className='flex gap-6'>
                     <p>Quantidade : {item.Quantity}</p>
                     <p>Tamanho : {item.Size}</p>
                   </div>
-                  <div className='space-x-2'>
-                    <input type='checkbox' id='gift' onChange={e => handleGift(item.Id)} />
-                    <label htmlFor='gift' >Este pedido é para presente</label>
+                  <div className='space-x-1 flex items-center'>
+                    <Checkbox id={item.Id} onChange={() => handleGift(item.Id)} />
+                    <label htmlFor={item.Id} className='select-none' >Este pedido é para presente</label>
                   </div>
-                  <button className='text-left' onClick={(e) => handleRemove(item.Id, e)}>Excluir</button>
+                  <button className='text-center border-2 w-20 bg-red-400 rounded-xl' onClick={(e) => handleRemove(item.Id, e)}>Excluir</button>
                 </div>
               </section>
             ))}
           </div>
           <div className='w-full flex justify-between py-2 px-4 items-center'>
-            <button className='text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100'>Fechar pedido</button>
+            <button className='text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100 font-serif' onClick={(e) => handleSubmit(e)}>Fechar pedido</button>
             {finalPrice ?
               <h2 className='text-xl'>Subtotal ({SelectedItems?.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
               :
-              <h2 className='text-xl'>Nenhum Item no pedido</h2>
+              <h2 className='text-xl'>Nenhum item no pedido</h2>
             }
           </div>
         </form>

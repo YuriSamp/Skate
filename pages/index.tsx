@@ -55,7 +55,7 @@ export default function Home() {
           <h2 className="titulo" >SOBRE</h2>
           <div className=" items-center justify-center md:flex md:gap-0 px-8">
             <article className='text-center lg:w-3/5'>
-              <p className="text-3xl italic lg:w-3/5 text-left" >A Thrasher Skateboard Magazine é uma revista de publicação mensal sobre o
+              <p className="text-3xl italic lg:w-3/5 text-center lg:text-left" >A Thrasher Skateboard Magazine é uma revista de publicação mensal sobre o
                 skate trazendo entrevistas com skatistas profissionais e artigos sobre esportes, foi fundada em 1981 por Kevin Thatcher e Fausto Vitello.
                 A revista também possui uma premiação anual intitulada Skater of the year (Skatista do ano) desde 1990</p>
             </article>
