@@ -16,10 +16,10 @@ function NavBar() {
           <Link href='/' className='text-2xl lg:hover:border-b-2 border-black '>Home</Link>
         </li>
         <li className='text-center'>
-          <Link href='/cart' className='text-2xl lg:hover:border-b-2 border-black '>Carrinho</Link>
+          <Link href='/carrinho' className='text-2xl lg:hover:border-b-2 border-black '>Carrinho</Link>
         </li>
         <li className='text-center'>
-          <Link href='/contact' className='text-2xl lg:hover:border-b-2 border-black '>Contato</Link>
+          <Link href='/contato' className='text-2xl lg:hover:border-b-2 border-black '>Contato</Link>
         </li>
       </ul>
     </nav>

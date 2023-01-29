@@ -8,6 +8,7 @@ import { CiMoneyBill } from "react-icons/ci";
 import Shapeforms from '../../components/Shapeforms'
 import Link from 'next/link';
 import Footer from '../../components/Footer';
+import Head from 'next/head';
 
 const Produto = () => {
   const router = useRouter()
@@ -22,6 +23,9 @@ const Produto = () => {
 
   return (
     <>
+      <Head>
+        <title>Thrasher</title>
+      </Head>
       <NavBar />
       <main className='m-auto w-[47rem] lg:w-[72rem] my-16 '>
         <Link href='/' className='flex items-center gap-4 py-4'>

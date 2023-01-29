@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react'
+import { screen, render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import Shapeforms from '../components/Shapeforms'
@@ -42,31 +42,21 @@ describe('testing form', () => {
   })
 
   // Voltarei pra descobrir como testa a tag select
-  // test('Should add to cart and display the sucess mensage', async () => {
-  //   const user = userEvent.setup()
-  //   render(<RecoilRoot>
-  //     <Shapeforms Price={419} Name={"Primitive Wade Desarmo Rapture"} Image={"/shapes/Shape-11.jpg"} />
-  //   </RecoilRoot>
-  //   )
-  //   const SelectSize = screen.getByTestId('selectField')
-  //   await user.click(SelectSize)
+  test('Should add to cart and display the sucess mensage', async () => {
+    const user = userEvent.setup()
+    render(<RecoilRoot>
+      <Shapeforms Price={419} Name={"Primitive Wade Desarmo Rapture"} Image={"/shapes/Shape-11.jpg"} />
+    </RecoilRoot>
+    )
 
-  //   const seletor: any = screen.getByRole('option', { name: '8.50' })
-  //   await user.click(seletor)
+    user.selectOptions(screen.getByTestId('selectField'), '8.125')
+    // expect(screen.getByRole('option', { name: '8.12' }).selected).toBe(true)
 
-  //   user.selectOptions(
-  //     screen.getByRole('combobox'),
-  //     screen.getByRole('option', { name: '8.50' }),
-  //   )
+    const QuantidadeHadlePlus = screen.getByTestId('SUM')
+    await user.dblClick(QuantidadeHadlePlus);
+    await user.click(screen.getByText('Adicionar ao carrinho'))
 
-  //   expect(seletor.selected).toBe(true)
-
-  //   const QuantidadeHadlePlus = screen.getByTestId('SUM')
-  //   await user.dblClick(QuantidadeHadlePlus);
-  //   await user.click(screen.getByText('Adicionar ao carrinho'))
-
-  //   user.selectOptions(screen.getByTestId('selectField'), ['8.125'])
-  //   expect(screen.getByText('Seu item foi adicionado ao carrinho')).toBeInTheDocument()
-  // })
+    waitFor(async () => expect(screen.getByText('Seu item foi adicionado ao carrinho')).toBeInTheDocument())
+  })
 
 })
