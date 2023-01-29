@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import evento1 from '../public/cover/4.jpg';
-import evento2 from '../public/cover/1.jpg';
-import evento3 from '../public/cover/3.jpg';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import shapes from '../data/shapes.json';
 import ShapeHome from '../components/shape/ShapeHome';
+import Poster from '../components/Poster';
 
 
 export default function Home() {
@@ -29,15 +27,15 @@ export default function Home() {
         <section className='pb-10'>
           <h2 className="titulo">Galeria</h2>
           <div className="lg:flex justify-center">
-            <div className="px-8 py-4 flex justify-center">
-              <Image src={evento1} alt="" width={500} height={500} />
-            </div>
-            <div className="px-8 py-4 flex justify-center">
-              <Image src={evento2} alt="" width={500} height={500} />
-            </div>
-            <div className="px-8 py-4 flex justify-center">
-              <Image src={evento3} alt="" width={500} height={500} />
-            </div>
+            <Poster
+              path={"/cover/4.jpg"}
+            />
+            <Poster
+              path={"/cover/1.jpg"}
+            />
+            <Poster
+              path={"/cover/3.jpg"}
+            />
           </div>
         </section>
         <section className='pb-10 px-2'>

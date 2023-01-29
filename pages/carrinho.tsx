@@ -44,7 +44,7 @@ export default function Carrinho() {
   function handleRemove(id: string, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     const ListaVerificada = CartItems?.filter(item => item.Id !== id)
-    ListaVerificada && setLista(ListaVerificada);
+    setLista(ListaVerificada);
   }
 
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
