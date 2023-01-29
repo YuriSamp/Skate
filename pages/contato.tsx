@@ -19,7 +19,6 @@ export default function Contato() {
   const onSubmit: SubmitHandler<IContact> = data => console.log(data);
   const [sucessMsg, setSucessMsg] = useState('');
 
-
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       setSucessMsg('Sua mensagem foi enviada, fique de olho no seu email')

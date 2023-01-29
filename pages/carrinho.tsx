@@ -8,13 +8,14 @@ import { FormataBRL } from '../utils/FormataBRL'
 import Footer from '../components/Footer'
 import { Checkbox } from "@material-tailwind/react";
 import React, { useState, useEffect } from 'react'
-import { IShapes } from '../utils/interfaces/Shape'
+import { IShapes } from '../interfaces/Shape'
+import { ProductPrice } from '../utils/PriceReduce'
 
 
 export default function Carrinho() {
 
   const [lista, setLista] = useRecoilState<IShapes[]>(ListaDeCompras)
-  const [CartItems, setCartItems] = useState<IShapes[]>()
+  const [CartItems, setCartItems] = useState<IShapes[]>([])
 
   useEffect(() => {
     const ListaTradada = lista.map(item => {
@@ -28,9 +29,7 @@ export default function Carrinho() {
     setCartItems(ListaTradada)
   }, [lista])
 
-  const SelectedItems = CartItems?.filter(item => item.Selecionado === true)
-  const arrPrice = SelectedItems?.map(item => item.Price * item.Quantity);
-  const finalPrice = arrPrice?.reduce((a, b) => a + b, 0)
+  const { finalPrice, SelectedItems } = ProductPrice(CartItems)
 
   function BooleanChange(id: string, Propriedade: boolean) {
     const ListaVerificada = CartItems?.map(item => {
@@ -50,11 +49,6 @@ export default function Carrinho() {
 
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
-    const Payment = {
-      ...SelectedItems,
-      finalPrice,
-    }
-    console.log(Payment)
     setLista([])
   }
 

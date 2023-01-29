@@ -5,7 +5,7 @@ import { AiOutlineArrowLeft, AiOutlineCreditCard, } from "react-icons/ai";
 import shapes from '../../data/shapes.json';
 import { FormataBRL } from '../../utils/FormataBRL'
 import { CiMoneyBill } from "react-icons/ci";
-import Shapeforms from '../../components/Shapeforms'
+import Shapeforms from '../../components/shape/ShapeForm'
 import Link from 'next/link';
 import Footer from '../../components/Footer';
 import Head from 'next/head';

@@ -1,7 +1,7 @@
 import { screen, render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import Shapeforms from '../components/Shapeforms'
+import Shapeforms from '../components/shape/ShapeForm'
 import { RecoilRoot } from 'recoil'
 import selectEvent from 'react-select-event'
 

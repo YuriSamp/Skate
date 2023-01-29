@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { IShapes } from '../utils/interfaces/Shape';
-import { ListaDeCompras } from '../utils/atom';
+import { IShapes } from '../../../interfaces/Shape';
+import { ListaDeCompras } from '../../../utils/atom';
 import { useRecoilState } from 'recoil';
+import { handleQuantity } from './utils/HandleQuantity';
 
 type Props = {
   Price: number
@@ -14,13 +15,12 @@ function Shapeforms({ Price, Name, Image }: Props) {
 
   const [Quantity, setQuantity] = useState(1);
   const [Size, setSize] = useState('');
-  const [list, setList] = useRecoilState<IShapes[]>(ListaDeCompras);
+  const [_, setList] = useRecoilState<IShapes[]>(ListaDeCompras);
   const [errMsg, setErrMsg] = useState('');
   const [sucessMsg, setSucessMsg] = useState('');
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-
     if (Size === '' || Size === 'Selecione uma opção') {
       setErrMsg('Por favor selecione o tamanho desejado')
       return
@@ -36,21 +36,9 @@ function Shapeforms({ Price, Name, Image }: Props) {
     }
     setList((prevState) => [...prevState, cartItem])
     setSucessMsg('Seu item foi adicionado ao carrinho')
-
     setTimeout(() => {
       setSucessMsg('')
     }, 4000);
-  }
-
-  function handleQuantity(number: number, operation: string) {
-    const rangeOfSum = number >= 1 && number < 10
-    const rangeOfSubtraction = number > 1 && number <= 10
-    if (operation === 'SUM' && rangeOfSum) {
-      setQuantity(number + 1)
-    }
-
-    if (operation === 'SUBTRACTION' && rangeOfSubtraction)
-      setQuantity(number - 1)
   }
 
   function HandleSelect(size: React.ChangeEvent<HTMLSelectElement>) {
@@ -75,9 +63,9 @@ function Shapeforms({ Price, Name, Image }: Props) {
         <div className='flex items-center gap-6 pt-4'>
           <h3>Quantidade:</h3>
           <div className='flex items-center gap-4 border-[1px] py-2 px-2'>
-            <AiOutlineMinus onClick={() => handleQuantity(Quantity, 'SUBTRACTION')} className='hover:cursor-pointer' data-testid='SUB' />
+            <AiOutlineMinus onClick={() => handleQuantity(Quantity, 'SUBTRACTION', setQuantity)} className='hover:cursor-pointer' data-testid='SUB' />
             <input data-testid='value' value={Quantity} className='w-8 border-none text-center outline-none' onChange={(e) => setQuantity(Number(e.currentTarget.value))} />
-            <AiOutlinePlus onClick={() => handleQuantity(Quantity, 'SUM')} className='hover:cursor-pointer' data-testid='SUM' />
+            <AiOutlinePlus onClick={() => handleQuantity(Quantity, 'SUM', setQuantity)} className='hover:cursor-pointer' data-testid='SUM' />
           </div>
         </div>
         <div className='mt-4'>
