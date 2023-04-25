@@ -49,8 +49,8 @@ function Shapeforms({ Price, Name, Image }: Props) {
   return (
     <form onSubmit={onSubmit} data-testid="form">
       <section className='flex flex-col gap-2 pt-6'>
-        <h3 className='py-2 text-lg'>Selecione uma opção de <strong>Tamanho:</strong></h3>
-        <select className='w-[22rem] px-2 py-3 text-gray-600' required onChange={e => HandleSelect(e)} data-testid='selectField' name="size">
+        <h3 className='py-2 sm:text-lg'>Selecione uma opção de <strong>Tamanho:</strong></h3>
+        <select className='w-[15rem] lg:w-[19rem] xl:w-[22rem] px-2 py-3 text-gray-600' required onChange={e => HandleSelect(e)} data-testid='selectField' name="size">
           <option data-testid='defaultOption' >Selecione uma opção</option>
           <option data-testid='8.50'>8.50</option>
           <option data-testid='8.25'>8.25</option>
@@ -69,7 +69,7 @@ function Shapeforms({ Price, Name, Image }: Props) {
           </div>
         </div>
         <div className='mt-4'>
-          <button className='w-[22rem] bg-black text-white text-2xl py-4 font-serif select-none' type='submit' >Adicionar ao carrinho</button>
+          <button className='w-[15rem] lg:w-[19rem] xl:w-[22rem] bg-black text-white sm:text-lg lg:text-xl xl:text-2xl py-4 font-serif select-none' type='submit' >Adicionar ao carrinho</button>
         </div>
         <div className='pt-4'>
           <p className='text-green-600 font-bold'>{sucessMsg}</p>

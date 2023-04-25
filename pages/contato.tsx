@@ -38,7 +38,7 @@ export default function Contato() {
         <NavBar />
       </header>
       <main className='flex py-14 lg:py-0  '>
-        <form className=' flex flex-col justify-center text-center w-full py-10 lg:w-1/2' onSubmit={handleSubmit(onSubmit)} >
+        <form className=' flex flex-col justify-center text-center w-full py-10 xl:w-1/2' onSubmit={handleSubmit(onSubmit)} >
           <h1 className='text-2xl uppercase'>Entre em contato</h1>
           <InputFields
             register={register}
@@ -48,7 +48,7 @@ export default function Contato() {
           </div>
           <p className='text-green-600 font-bold '>{sucessMsg}</p>
         </form>
-        <Image src={event2} alt='foto de um evento de skate' className='hidden lg:flex lg:w-2/3' />
+        <Image src={event2} alt='foto de um evento de skate' className='hidden xl:flex xl:w-2/3' priority={true} />
       </main >
       <Footer />
     </>
