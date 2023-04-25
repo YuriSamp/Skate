@@ -74,7 +74,7 @@ export default function Carrinho() {
           </div>
           <div className='flex flex-col border-b-2'>
             {CartItems?.map((item, index) => (
-              <section key={index} className='flex flex-col sm:flex-row items-center py-4 gap-20'>
+              <section key={index} className='flex flex-col sm:flex-row items-center py-4 gap-5 sm:gap-20'>
                 <div className='flex'>
                   <div className='flex items-center px-4'>
                     <Checkbox defaultChecked onChange={() => item.Selecionado && BooleanChange(item.Id, item.Selecionado)} />
