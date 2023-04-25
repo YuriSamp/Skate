@@ -41,8 +41,8 @@ function InputFields({ register }: any) {
         />
       </div>
       <div className='flex flex-col py-5 text-left items-center'>
-        <h3 className='w-96 md:w-[29.5rem]'>Sua mensagem</h3>
-        <textarea className='border-2 border-black p-2 w-96 md:w-[29.5rem] resize-none h-24' placeholder='Tente ser breve e conciso' {...register('mensage')} />
+        <h3 className='w-72 sm:w-96 md:w-[29.5rem]'>Sua mensagem</h3>
+        <textarea className='border-2 border-black p-2 w-72 sm:w-96 md:w-[29.5rem] resize-none h-24' placeholder='Tente ser breve e conciso' {...register('mensage')} />
       </div>
     </section>
   )

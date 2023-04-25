@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import logo from '../public/logo1.jpg';
 
 function NavBar() {
@@ -11,15 +10,15 @@ function NavBar() {
           <Image src={logo} alt='Logo da Thrasher' />
         </Link>
       </div>
-      <ul className='py-2 flex gap-8 items-center justify-center lg:gap-16'>
+      <ul className='py-2 flex gap-8 items-center justify-center lg:gap-16 text-lg sm:text-2xl'>
         <li className='text-center'>
-          <Link href='/' className='text-2xl lg:hover:border-b-2 border-black '>Home</Link>
+          <Link href='/' className='lg:hover:border-b border-black '>Home</Link>
         </li>
         <li className='text-center'>
-          <Link href='/carrinho' className='text-2xl lg:hover:border-b-2 border-black '>Carrinho</Link>
+          <Link href='/carrinho' className='lg:hover:border-b border-black '>Carrinho</Link>
         </li>
         <li className='text-center'>
-          <Link href='/contato' className='text-2xl lg:hover:border-b-2 border-black '>Contato</Link>
+          <Link href='/contato' className='lg:hover:border-b border-black '>Contato</Link>
         </li>
       </ul>
     </nav>

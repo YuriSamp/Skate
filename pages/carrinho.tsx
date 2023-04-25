@@ -10,12 +10,16 @@ import { Checkbox } from "@material-tailwind/react";
 import React, { useState, useEffect } from 'react'
 import { IShapes } from '../interfaces/Shape'
 import { ProductPrice } from '../utils/PriceReduce'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Carrinho() {
 
   const [lista, setLista] = useRecoilState<IShapes[]>(ListaDeCompras)
   const [CartItems, setCartItems] = useState<IShapes[]>([])
+
+  const notify = () => toast.success("Esse era o meu aplicativo, espero que tenha gostado");
 
   useEffect(() => {
     const ListaTradada = lista.map(item => {
@@ -50,6 +54,7 @@ export default function Carrinho() {
   function handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
     setLista([])
+    notify()
   }
 
   return (
@@ -61,25 +66,28 @@ export default function Carrinho() {
         <NavBar />
       </header>
       <main>
-        <form className='m-auto md:w-[47rem] lg:w-[72rem] pt-16 pb-24 min-h-[73vh] ' >
+        <ToastContainer />
+        <form className='m-auto md:w-[47rem] lg:w-[64rem] xl:w-[72rem] pt-16 pb-24  ' >
           <div className='flex items-center gap-4 py-4 pl-10'>
             <AiOutlineShoppingCart className='w-7 h-7' />
             <h1 className='text-2xl uppercase'>Carrinho</h1>
           </div>
           <div className='flex flex-col border-b-2'>
             {CartItems?.map((item, index) => (
-              <section key={index} className='flex py-4'>
-                <div className='flex items-center px-4'>
-                  <Checkbox defaultChecked onChange={() => item.Selecionado && BooleanChange(item.Id, item.Selecionado)} />
+              <section key={index} className='flex flex-col sm:flex-row items-center py-4 gap-20'>
+                <div className='flex'>
+                  <div className='flex items-center px-4'>
+                    <Checkbox defaultChecked onChange={() => item.Selecionado && BooleanChange(item.Id, item.Selecionado)} />
+                  </div>
+                  <Image src={item.Image} alt='foto do produto' width={200} height={200} className='border-[1px] border-black w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] lg:h-[300px] lg:w-[300px]' />
                 </div>
-                <Image src={item.Image} alt='foto do produto' width={200} height={200} className='border-[1px] border-black' />
-                <div className='flex flex-col px-4 w-full gap-6'>
-                  <div className='flex items-baseline justify-between'>
+                <div className='flex flex-col items-center sm:items-start px-4 w-full gap-6'>
+                  <div className='flex flex-col lg:flex-row items-baseline justify-between'>
                     <h3 className='md:text-lg lg:text-2xl'>{item.Name}</h3>
                     <p className='md:text-lg lg:text-xl'>Unidade: <strong>{FormataBRL(item.Price)}</strong></p>
                   </div>
                   <p className='text-xl text-green-700'>Em estoque</p>
-                  <div className='flex gap-6'>
+                  <div className='flex flex-row gap-2 lg:gap-6'>
                     <p>Quantidade : {item.Quantity}</p>
                     <p>Tamanho : {item.Size}</p>
                   </div>
@@ -92,10 +100,10 @@ export default function Carrinho() {
               </section>
             ))}
           </div>
-          <div className='w-full flex justify-between py-2 px-4 items-center'>
-            <button className='text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100 font-serif' onClick={(e) => handleSubmit(e)}>Fechar pedido</button>
+          <div className='w-full flex justify-between py-2 px-4 gap-10 sm:gap-0 items-center'>
+            <button className='sm:text-2xl border-2 p-4 rounded-3xl bg-black text-gray-100 font-serif' onClick={(e) => handleSubmit(e)}>Fechar pedido</button>
             {finalPrice ?
-              <h2 className='text-xl'>Subtotal ({SelectedItems?.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
+              <h2 className='sm:text-xl'>Subtotal ({SelectedItems?.length} item): <strong>{FormataBRL(finalPrice)}</strong></h2>
               :
               <h2 className='text-xl'>Nenhum item no pedido</h2>
             }
@@ -106,4 +114,3 @@ export default function Carrinho() {
     </>
   )
 }
-
